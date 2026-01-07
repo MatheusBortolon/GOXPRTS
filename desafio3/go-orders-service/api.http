@@ -1,0 +1,44 @@
+### REST API - List Orders
+GET http://localhost:8080/orders
+Content-Type: application/json
+
+###
+
+### REST API - Get Order by ID
+GET http://localhost:8080/orders/1
+Content-Type: application/json
+
+###
+
+### REST API - Create Order
+POST http://localhost:8080/orders
+Content-Type: application/json
+
+{
+  "id": "1",
+  "customer_id": "cust_123",
+  "amount": 99.99,
+  "status": "pending",
+  "created_at": "2026-01-07T00:00:00Z",
+  "updated_at": "2026-01-07T00:00:00Z"
+}
+
+###
+
+### GraphQL - List Orders
+POST http://localhost:8081/graphql
+Content-Type: application/json
+
+{
+  "query": "{ listOrders }"
+}
+
+###
+
+### GraphQL - Get Order
+POST http://localhost:8081/graphql
+Content-Type: application/json
+
+{
+  "query": "{ getOrder(id: \"1\") }"
+}

@@ -1,0 +1,51 @@
+services:
+  orders-service-rest:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    command: ["/usr/local/bin/rest"]
+    ports:
+      - "8080:8080"
+    environment:
+      - DATABASE_URL=postgres://user:password@db:5432/orders?sslmode=disable
+    depends_on:
+      - db
+
+  orders-service-grpc:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    command: ["/usr/local/bin/grpc"]
+    ports:
+      - "50051:50051"
+    environment:
+      - DATABASE_URL=postgres://user:password@db:5432/orders?sslmode=disable
+    depends_on:
+      - db
+
+  orders-service-graphql:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    command: ["/usr/local/bin/graphql"]
+    ports:
+      - "8081:8081"
+    environment:
+      - DATABASE_URL=postgres://user:password@db:5432/orders?sslmode=disable
+    depends_on:
+      - db
+
+  db:
+    image: postgres:13
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: orders
+    volumes:
+      - db_data:/var/lib/postgresql/data
+
+volumes:
+  db_data:

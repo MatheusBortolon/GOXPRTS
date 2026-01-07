@@ -1,0 +1,35 @@
+# Environment variables
+*.env
+*.env.local
+*.env.*.local
+
+# Go
+bin/
+dist/
+*.exe
+*.dll
+*.so
+*.dylib
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Docker
+docker-compose.override.yml
+
+# Database
+*.db
+*.sqlite
+desafio3/go-orders-service/coverage
+desafio3/go-orders-service/COVERAGE_REPORT.md
+desafio3/go-orders-service/grpc_coverage
+desafio3/coverage
+desafio3/enunciado.md
