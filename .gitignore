@@ -32,4 +32,5 @@ desafio3/go-orders-service/coverage
 desafio3/go-orders-service/COVERAGE_REPORT.md
 desafio3/go-orders-service/grpc_coverage
 desafio3/coverage
-desafio3/enunciado.md
+StressTest/stresstest
+*/enunciado.md
