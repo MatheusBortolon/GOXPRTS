@@ -1,0 +1,8 @@
+@baseUrl = http://localhost:8080
+@cep = 01001000
+
+### Get weather by CEP
+GET {{baseUrl}}/weather?cep={{cep}}
+
+### Invalid CEP
+GET {{baseUrl}}/weather?cep=123
