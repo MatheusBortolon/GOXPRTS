@@ -1,0 +1,50 @@
+version: "3.9"
+
+services:
+  service-a:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        SERVICE: service-a
+    environment:
+      SERVICE_A_PORT: "8080"
+      SERVICE_B_URL: "http://service-b:8081"
+      OTEL_EXPORTER_OTLP_ENDPOINT: "http://otel-collector:4318"
+    ports:
+      - "8080:8080"
+    depends_on:
+      - service-b
+      - otel-collector
+
+  service-b:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        SERVICE: service-b
+    env_file:
+      - .env
+    environment:
+      SERVICE_B_PORT: "8081"
+      OTEL_EXPORTER_OTLP_ENDPOINT: "http://otel-collector:4318"
+    ports:
+      - "8081:8081"
+    depends_on:
+      - otel-collector
+      - zipkin
+
+  otel-collector:
+    image: otel/opentelemetry-collector-contrib:0.92.0
+    command: ["--config=/etc/otel-collector-config.yaml"]
+    volumes:
+      - ./otel-collector-config.yaml:/etc/otel-collector-config.yaml:ro
+    ports:
+      - "4318:4318"
+    depends_on:
+      - zipkin
+
+  zipkin:
+    image: openzipkin/zipkin:2.24
+    ports:
+      - "9411:9411"
