@@ -32,6 +32,10 @@ Erros:
 - 422 `invalid zipcode`
 - 404 `can not find zipcode`
 
+## Demo
+
+- https://labgcr-814381679775.southamerica-east1.run.app/weather?cep=89035300
+
 ## Docker
 
 ```bash
